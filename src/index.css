@@ -29,8 +29,10 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-  line-height: 1;
-  background: #f4f4f4;
+	line-height: 1;
+	background: #f4f4f4;
+	font-size: 14px;
+	font-family: Arial Narrow, sans-serif;
 }
 ol, ul {
 	list-style: none;
