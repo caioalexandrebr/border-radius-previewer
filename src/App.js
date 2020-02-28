@@ -18,8 +18,8 @@ const Box = styled.div`
   background: #e91e63;
   border-top-left-radius: ${props => props.border.topLeft}px;
   border-top-right-radius: ${props => props.border.topRight}px;
-  border-bottom-right-radius: ${props => props.border.bottomLeft}px;
-  border-bottom-left-radius: ${props => props.border.bottomRight}px;
+  border-bottom-left-radius: ${props => props.border.bottomLeft}px;
+  border-bottom-right-radius: ${props => props.border.bottomRight}px;
 `;
 
 const Properties = styled.div`
@@ -72,7 +72,6 @@ class App extends React.Component {
 
     this.state = {
       border: {
-        all: 50,
         topLeft: 50,
         topRight: 50,
         bottomLeft: 50,
@@ -81,34 +80,28 @@ class App extends React.Component {
     };
   }
 
-  handleChange(name, value) {
-    if (name === 'all') {
-      this.setState({ border: { all: value, topLeft: value, topRight: value, bottomLeft: value, bottomRight: value } });
-    } else if (name === 'topLeft') {
-      this.setState({ border: { topLeft: value } });
-    } else if (name === 'topRight') {
-      this.setState({ border: { topRight: value } });
-    } else if (name === 'bottomLeft') {
-      this.setState({ border: { bottomLeft: value } });
-    } else if (name === 'bottomRight') {
-      this.setState({ border: { bottomRight: value } });
-    }
+  handleChange(topLeft, topRight, bottomLeft, bottomRight) {
+    this.setState({ border: { topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight } });
   }
 
   render() {
     return (
       <Content>
         <Properties>
-          <InputLabel label="All Corners" placeholder={this.state.border.all}/>
-          <Input onChange={e => this.handleChange('all', e.target.value)} value={this.state.border.all} type="range" min="1" max="100"/>
+          <InputLabel label="All Corners" placeholder={this.state.border.topLeft}/>
+          <Input onChange={e => this.handleChange(e.target.value, e.target.value, e.target.value, e.target.value)} type="range" min="1" max="100"/>
+          
           <InputLabel label="Top Left" placeholder={this.state.border.topLeft}/>
-          <Input onChange={e => this.handleChange('topLeft', e.target.value)} value={this.state.border.topLeft} type="range" min="1" max="100"/>
+          <Input onChange={e => this.handleChange(e.target.value, this.state.border.topRight, this.state.border.bottomLeft, this.state.border.bottomRight)} type="range" min="1" max="100"/>
+          
           <InputLabel label="Top Right" placeholder={this.state.border.topRight}/>
-          <Input onChange={e => this.handleChange('topRight', e.target.value)} value={this.state.border.topRight} type="range" min="1" max="100"/>
+          <Input onChange={e => this.handleChange(this.state.border.topLeft, e.target.value, this.state.border.bottomLeft, this.state.border.bottomRight)} type="range" min="1" max="100"/>
+          
           <InputLabel label="Bottom Left" placeholder={this.state.border.bottomLeft}/>
-          <Input onChange={e => this.handleChange('bottomLeft', e.target.value)} value={this.state.border.bottomLeft} type="range" min="1" max="100"/>
+          <Input onChange={e => this.handleChange(this.state.border.topLeft, this.state.border.topRight, e.target.value, this.state.border.bottomRight)} type="range" min="1" max="100"/>
+          
           <InputLabel label="Bottom Right" placeholder={this.state.border.bottomRight}/>
-          <Input onChange={e => this.handleChange('bottomRight', e.target.value)} value={this.state.border.bottomRight} type="range" min="1" max="100"/>
+          <Input onChange={e => this.handleChange(this.state.border.topLeft, this.state.border.topRight, this.state.border.bottomLeft, e.target.value)} type="range" min="1" max="100"/>
         </Properties>
         <Box border={this.state.border}/>
       </Content>
