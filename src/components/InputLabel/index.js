@@ -24,7 +24,7 @@ const InputLabel = (props) => (
   <Content>
     <span>{props.label}</span>
     <div>
-      <input type="text" placeholder={props.placeholder}/>
+      <input disabled type="text" placeholder={props.placeholder}/>
       <span>px</span>
     </div>
   </Content>
