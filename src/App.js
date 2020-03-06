@@ -72,6 +72,7 @@ class App extends React.Component {
 
     this.state = {
       border: {
+        all: 50,
         topLeft: 50,
         topRight: 50,
         bottomLeft: 50,
@@ -80,28 +81,30 @@ class App extends React.Component {
     };
   }
 
-  handleChange(topLeft, topRight, bottomLeft, bottomRight) {
-    this.setState({ border: { topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight } });
+  handleChange(all, topLeft, topRight, bottomLeft, bottomRight) {
+    this.setState({ border: { all: all, topLeft: topLeft, topRight: topRight, bottomLeft: bottomLeft, bottomRight: bottomRight } });
   }
 
   render() {
     return (
       <Content>
         <Properties>
-          <InputLabel label="All Corners" placeholder={this.state.border.topLeft}/>
-          <Input onChange={e => this.handleChange(e.target.value, e.target.value, e.target.value, e.target.value)} type="range" min="1" max="100"/>
+
+          <InputLabel label="All Corners" placeholder={this.state.border.all}/>
+          <Input onChange={e => this.handleChange(e.target.value, e.target.value, e.target.value, e.target.value, e.target.value)} type="range" min="1" max="100"/>
           
           <InputLabel label="Top Left" placeholder={this.state.border.topLeft}/>
-          <Input onChange={e => this.handleChange(e.target.value, this.state.border.topRight, this.state.border.bottomLeft, this.state.border.bottomRight)} type="range" min="1" max="100"/>
+          <Input onChange={e => this.handleChange(this.state.border.all, e.target.value, this.state.border.topRight, this.state.border.bottomLeft, this.state.border.bottomRight)} value={this.state.border.topLeft} type="range" min="1" max="100"/>
           
           <InputLabel label="Top Right" placeholder={this.state.border.topRight}/>
-          <Input onChange={e => this.handleChange(this.state.border.topLeft, e.target.value, this.state.border.bottomLeft, this.state.border.bottomRight)} type="range" min="1" max="100"/>
+          <Input onChange={e => this.handleChange(this.state.border.all, this.state.border.topLeft, e.target.value, this.state.border.bottomLeft, this.state.border.bottomRight)} value={this.state.border.topRight} type="range" min="1" max="100"/>
           
           <InputLabel label="Bottom Left" placeholder={this.state.border.bottomLeft}/>
-          <Input onChange={e => this.handleChange(this.state.border.topLeft, this.state.border.topRight, e.target.value, this.state.border.bottomRight)} type="range" min="1" max="100"/>
+          <Input onChange={e => this.handleChange(this.state.border.all, this.state.border.topLeft, this.state.border.topRight, e.target.value, this.state.border.bottomRight)} value={this.state.border.bottomLeft} type="range" min="1" max="100"/>
           
           <InputLabel label="Bottom Right" placeholder={this.state.border.bottomRight}/>
-          <Input onChange={e => this.handleChange(this.state.border.topLeft, this.state.border.topRight, this.state.border.bottomLeft, e.target.value)} type="range" min="1" max="100"/>
+          <Input onChange={e => this.handleChange(this.state.border.all, this.state.border.topLeft, this.state.border.topRight, this.state.border.bottomLeft, e.target.value)} value={this.state.border.bottomRight} type="range" min="1" max="100"/>
+          
         </Properties>
         <Box border={this.state.border}/>
       </Content>
